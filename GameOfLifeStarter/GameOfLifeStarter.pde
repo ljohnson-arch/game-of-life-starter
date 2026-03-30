@@ -17,6 +17,8 @@ void setup() {
 void draw() {
   showGrid(); // STEP 2 - Implement this method so you can see your 2D array
   // grid = calcNextGrid(); // uncomment this after you get showGrid() working
+  
+  square(x,y,spacing);
 }
 
 int[][] calcNextGrid() {
