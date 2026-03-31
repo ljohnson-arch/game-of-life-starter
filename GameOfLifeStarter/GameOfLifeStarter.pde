@@ -11,7 +11,16 @@ void setup() {
   grid = new int[height / SPACING][width / SPACING];
 
   // STEP 1 - Populate initial grid (you may want to use Arrays.toString to check it)
-
+  for(int row = 0; row < height / SPACING; row++){
+    for(int col = 0; col < width / SPACING; col++){
+      if(Math.random() < DENSITY){
+        grid[row][col] = 1;
+      } else{
+        grid[row][col] = 0;
+      }
+    }
+  }
+  
 }
 
 void draw() {
@@ -40,8 +49,16 @@ int countNeighbors(int y, int x) {
 
 void showGrid() {
   // your code here
-  fill(255,0,0);
-  square(0,0,SPACING);
+  for(int row = 0; row < height / SPACING; row++){
+    for(int col = 0; col < width / SPACING; col++){
+      if(grid[row][col] == 1){
+        fill(255,0,0);
+      } else{
+        fill(0,0,0);
+      }
+      square(col * SPACING, row * SPACING, SPACING);
+    }
+  }
   // use square() to represent each cell
   // use fill(r, g, b) to control color: black for empty, red for filled (or alive)
   // each square (cell) has a width and height of SPACING. 
