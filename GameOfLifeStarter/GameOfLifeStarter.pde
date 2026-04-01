@@ -20,7 +20,6 @@ void setup() {
       }
     }
   }
-  
 }
 
 void draw() {
@@ -40,10 +39,43 @@ int[][] calcNextGrid() {
 
 int countNeighbors(int y, int x) {
   int n = 0; // don't count yourself!
-  
+  int count = 0;
   // your code here
   // don't check out-of-bounds cells!
-
+  if(grid[x-1][y] == 1){ // to the left
+    count++;
+  }
+  if(grid[x-1][y+1] == 1){ //to the left up
+    count++;
+  }
+  if(grid[x-1][y-1] == 1){ //to the left down
+    count++;
+  }
+  if(grid[x][y+1] == 1){ //up
+    count++;
+  }
+  if(grid[x][y-1] == 1){ //down
+    count++;
+  }
+  if(grid[x+1][y+1] == 1){ //to the right up
+    count++;
+  }
+  if(grid[x+1][y-1] == 1){ //to the right down
+    count++;
+  }
+  if(grid[x+1][y] == 1){ //to the right 
+    count++;
+  }
+  if ((grid[x][y] == 1) && (count <= 1) || (count >= 4)){ //if populated reason for death
+    grid[x][y]= 0;
+  }
+  if((grid[x][y] == 1) && (count == 2) || (count == 3)){ //if populated reason for survival
+    grid[x][y]= 1;
+  }
+  if((grid[x][y] == 0) && (count == 3)){ //if unpopulated reason for life;
+    grid[x][y] = 1;
+  }
+  
   return n;
 }
 
