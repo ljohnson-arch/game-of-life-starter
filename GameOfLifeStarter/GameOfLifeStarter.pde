@@ -34,55 +34,40 @@ int[][] calcNextGrid() {
 
   // your code here
 
+
   return nextGrid;
 }
 
 int countNeighbors(int y, int x) {
-  int n = 0; // don't count yourself!
   int count = 0;
   // your code here
   // don't check out-of-bounds cells!
-  if(grid[x-1][y] == 1){ // to the left
-    count++;
-  }
-  if(grid[x-1][y+1] == 1){ //to the left up
-    count++;
-  }
-  if(grid[x-1][y-1] == 1){ //to the left down
-    count++;
-  }
-  if(grid[x][y+1] == 1){ //up
-    count++;
-  }
-  if(grid[x][y-1] == 1){ //down
-    count++;
-  }
-  if(grid[x+1][y+1] == 1){ //to the right up
-    count++;
-  }
-  if(grid[x+1][y-1] == 1){ //to the right down
-    count++;
-  }
-  if(grid[x+1][y] == 1){ //to the right 
-    count++;
-  }
-  if ((grid[x][y] == 1) && (count <= 1) || (count >= 4)){ //if populated reason for death
-    grid[x][y]= 0;
-  }
-  if((grid[x][y] == 1) && (count == 2) || (count == 3)){ //if populated reason for survival
-    grid[x][y]= 1;
-  }
-  if((grid[x][y] == 0) && (count == 3)){ //if unpopulated reason for life;
-    grid[x][y] = 1;
+
+  for(int dy = -1; dy <= 1; dy++){
+    for(int dx = -1; dx <= 1; dx++){
+      if (dy == 0 && dx == 0){
+        continue; 
+      } 
+
+      int ny = y + dy; //neighboring cell
+      int nx = x + dx;
+
+      //out of bounds check 
+      if(ny >= 0 && ny < grid.length && nx >= 0 && nx < grid[0].length){
+        if(grid[ny][nx] == 1){
+          count++;
+        }
+      }
+    }
   }
   
-  return n;
+  return count;
 }
 
 void showGrid() {
   // your code here
-  for(int row = 0; row < height / SPACING; row++){
-    for(int col = 0; col < width / SPACING; col++){
+  for(int row = 0; row < grid.length; row++){
+    for(int col = 0; col < grid[0].length; col++){
       if(grid[row][col] == 1){
         fill(255,0,0);
       } else{
