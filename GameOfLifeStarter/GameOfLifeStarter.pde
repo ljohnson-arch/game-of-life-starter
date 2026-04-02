@@ -24,7 +24,7 @@ void setup() {
 
 void draw() {
   showGrid(); // STEP 2 - Implement this method so you can see your 2D array
-  // grid = calcNextGrid(); // uncomment this after you get showGrid() working
+  grid = calcNextGrid(); 
   
  
 }
@@ -33,7 +33,25 @@ int[][] calcNextGrid() {
   int[][] nextGrid = new int[grid.length][grid[0].length];
 
   // your code here
+  for (int row = 0; row < grid.length; row++){
+    for(int col = 0; col < grid[0].length; col++){
+      int neighbors = countNeighbors(row,col);
 
+      if (grid[row][col] == 1){
+        if(neighbors == 2 || neighbors == 3){ //if alreayd alive stays alive with neighbor count else dies
+          nextGrid[row][col] = 1;
+        } else {
+          nextGrid[row][col] = 0;
+        }
+      } else { //if dead populates with neighbor count of 3 otherwise stays dead.
+        if (neighbors == 3){
+          nextGrid[row][col] = 1;
+        } else {
+          nextGrid[row][col] = 0;
+        }
+      }
+    }
+  }
 
   return nextGrid;
 }
